@@ -4,10 +4,15 @@ import { GastoResDto } from '../dtos/response/gasto-res.dto';
 import { GastoRepository } from '../repositories/gasto.repository';
 import { GastoReqDto } from '../dtos/request/gasto-req.dto';
 import { AtualizarGastoReqDto } from '../dtos/request/atualizar-gasto-req.dto';
+import { InformacoesGastosResDto } from '../dtos/response/informacoes-gastos-res.dto';
+import { ListarInformacoesGastosBuilder } from '../dtos/listar-informacoes-gastos.builder';
 
 @Injectable()
 export class GastoService implements GastoServiceInterface {
-  constructor(private readonly gastoRepository: GastoRepository) {}
+  constructor(
+    private readonly listarInformacoesGastosBuilder: ListarInformacoesGastosBuilder,
+    private readonly gastoRepository: GastoRepository,
+  ) {}
 
   public async buscarTodos(): Promise<GastoResDto[]> {
     return this.gastoRepository.buscarTodos();
@@ -31,6 +36,12 @@ export class GastoService implements GastoServiceInterface {
     await this.existe(id);
 
     await this.gastoRepository.deletar(id);
+  }
+
+  public async buscarInformacoesDetalhadas(id: string): Promise<InformacoesGastosResDto> {
+    const gastos = await this.gastoRepository.buscarInformacoesDetalhadas(id);
+
+    return this.listarInformacoesGastosBuilder.build(gastos);
   }
 
   private async existe(id: string): Promise<GastoResDto> {

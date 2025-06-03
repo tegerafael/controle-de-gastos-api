@@ -4,6 +4,7 @@ import { PrismaService } from 'src/infra/modules/database/prisma/prisma.service'
 import { GastoResDto } from '../dtos/response/gasto-res.dto';
 import { GastoReqDto } from '../dtos/request/gasto-req.dto';
 import { AtualizarGastoReqDto } from '../dtos/request/atualizar-gasto-req.dto';
+import { GastosInformacoesDto } from '../dtos/gastos-informacoes.dto';
 
 @Injectable()
 export class GastoRepository implements GastoRepositoryInterface {
@@ -35,6 +36,20 @@ export class GastoRepository implements GastoRepositoryInterface {
   public async deletar(id: string): Promise<void> {
     await this.prismaService.gasto.delete({
       where: { id },
+    });
+  }
+
+  public async buscarInformacoesDetalhadas(id_usu_fk: string): Promise<GastosInformacoesDto[]> {
+    return this.prismaService.gasto.findMany({
+      select: {
+        valor: true,
+        usuario: {
+          select: {
+            nome: true,
+          },
+        },
+      },
+      where: { id_usu_fk },
     });
   }
 }

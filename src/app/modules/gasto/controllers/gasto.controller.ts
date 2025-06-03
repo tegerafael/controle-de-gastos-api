@@ -6,6 +6,7 @@ import { ErrorHandlerFactory } from 'src/app/commons/errors/error-handler.factor
 import { GastoService } from '../services/gasto.service';
 import { GastoReqDto } from '../dtos/request/gasto-req.dto';
 import { AtualizarGastoReqDto } from '../dtos/request/atualizar-gasto-req.dto';
+import { InformacoesGastosResDto } from '../dtos/response/informacoes-gastos-res.dto';
 
 @ApiTags('Gasto')
 @Controller('gastos')
@@ -116,6 +117,27 @@ export class GastoController implements GastoControllerInterface {
   public async deletar(@Param('id') id: string): Promise<void> {
     try {
       return this.gastoService.deletar(id);
+    } catch (error) {
+      ErrorHandlerFactory.throwError(error);
+    }
+  }
+
+  @Get(':id/informacoes')
+  @ApiOperation({ summary: 'Buscar informações detalhadas de gastos de um usuário pelo ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID do usuário para buscar informações detalhadas de gastos',
+    required: true,
+    type: String,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Informações detalhadas de gastos do usuário retornadas com sucesso',
+    type: GastoResDto,
+  })
+  public async buscarInformacoesDetalhadas(@Param('id') id: string): Promise<InformacoesGastosResDto> {
+    try {
+      return this.gastoService.buscarInformacoesDetalhadas(id);
     } catch (error) {
       ErrorHandlerFactory.throwError(error);
     }

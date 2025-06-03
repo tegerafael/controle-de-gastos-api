@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { CategoriaGasto } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime/library';
-import { IsString, IsNotEmpty, IsOptional, IsDate, IsDecimal, IsEnum, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsDate, IsEnum, IsNumber } from 'class-validator';
 
 export class GastoResDto {
   @ApiProperty()
