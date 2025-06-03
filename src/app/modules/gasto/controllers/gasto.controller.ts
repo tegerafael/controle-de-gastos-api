@@ -20,6 +20,7 @@ export class GastoController implements GastoControllerInterface {
     description: 'Lista de gastos retornada com sucesso',
     type: [GastoResDto],
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   public async buscarTodos(): Promise<GastoResDto[]> {
     try {
       return this.gastoService.buscarTodos();
@@ -45,6 +46,7 @@ export class GastoController implements GastoControllerInterface {
     status: 404,
     description: 'Gasto não encontrado',
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   public async buscarPorId(@Param('id') id: string): Promise<GastoResDto> {
     try {
       return this.gastoService.buscarPorId(id);
@@ -60,6 +62,7 @@ export class GastoController implements GastoControllerInterface {
     description: 'Gasto criado com sucesso',
     type: GastoReqDto,
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   public async criar(@Body() gasto: GastoReqDto): Promise<GastoResDto> {
     try {
       return this.gastoService.criar(gasto);
@@ -89,6 +92,7 @@ export class GastoController implements GastoControllerInterface {
     status: 404,
     description: 'Gasto não encontrado',
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   public async atualizar(@Param('id') id: string, @Body() gasto: AtualizarGastoReqDto): Promise<GastoResDto> {
     try {
       return this.gastoService.atualizar(id, gasto);
@@ -113,6 +117,7 @@ export class GastoController implements GastoControllerInterface {
     status: 404,
     description: 'Gasto não encontrado',
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   @HttpCode(204)
   public async deletar(@Param('id') id: string): Promise<void> {
     try {
@@ -122,7 +127,7 @@ export class GastoController implements GastoControllerInterface {
     }
   }
 
-  @Get(':id/informacoes')
+  @Get('usuario/:id')
   @ApiOperation({ summary: 'Buscar informações detalhadas de gastos de um usuário pelo ID' })
   @ApiParam({
     name: 'id',
@@ -135,6 +140,7 @@ export class GastoController implements GastoControllerInterface {
     description: 'Informações detalhadas de gastos do usuário retornadas com sucesso',
     type: GastoResDto,
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   public async buscarInformacoesDetalhadas(@Param('id') id: string): Promise<InformacoesGastosResDto> {
     try {
       return this.gastoService.buscarInformacoesDetalhadas(id);

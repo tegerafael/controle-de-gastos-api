@@ -19,6 +19,7 @@ export class UsuarioController implements UsuarioControllerInterface {
     description: 'Lista de usuários retornada com sucesso',
     type: [UsuarioResDto],
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   public async buscarTodos(): Promise<UsuarioResDto[]> {
     try {
       return this.usuarioService.buscarTodos();
@@ -44,6 +45,7 @@ export class UsuarioController implements UsuarioControllerInterface {
     status: 404,
     description: 'Usuário não encontrado',
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   public async buscarPorId(@Param('id') id: string): Promise<UsuarioResDto> {
     try {
       return this.usuarioService.buscarPorId(id);
@@ -59,6 +61,7 @@ export class UsuarioController implements UsuarioControllerInterface {
     description: 'Usuário criado com sucesso',
     type: UsuarioResDto,
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   public async criar(@Body() usuario: UsuarioReqDto): Promise<UsuarioResDto> {
     try {
       return this.usuarioService.criar(usuario);
@@ -88,6 +91,7 @@ export class UsuarioController implements UsuarioControllerInterface {
     status: 404,
     description: 'Usuário não encontrado',
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   public async atualizar(@Param('id') id: string, @Body() usuario: AtualizarUsuarioReqDto): Promise<UsuarioResDto> {
     try {
       return this.usuarioService.atualizar(id, usuario);
@@ -112,6 +116,7 @@ export class UsuarioController implements UsuarioControllerInterface {
     status: 404,
     description: 'Usuário não encontrado',
   })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   @HttpCode(204)
   public async deletar(@Param('id') id: string): Promise<void> {
     try {
