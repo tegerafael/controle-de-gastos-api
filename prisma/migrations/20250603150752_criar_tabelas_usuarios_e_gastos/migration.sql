@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE `usuarios` (
-    `id` VARCHAR(36) NOT NULL,
+    `id` VARCHAR(191) NOT NULL,
     `nome` VARCHAR(100) NOT NULL,
     `email` VARCHAR(100) NOT NULL,
     `senha` VARCHAR(255) NOT NULL,
@@ -16,10 +16,13 @@ CREATE TABLE `usuarios` (
 CREATE TABLE `gastos` (
     `id` VARCHAR(36) NOT NULL,
     `descricao` VARCHAR(255) NOT NULL,
-    `valor` DECIMAL(10, 2) NOT NULL,
-    `data` TIMESTAMP(3) NOT NULL,
+    `valor` FLOAT NOT NULL,
+    `data` DATE NOT NULL,
     `categoria` ENUM('ALIMENTACAO', 'TRANSPORTE', 'MORADIA', 'LAZER', 'EDUCACAO', 'SAUDE', 'OUTROS') NOT NULL,
     `id_usu_fk` VARCHAR(36) NOT NULL,
+    `criadoEm` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    `atualizadoEm` TIMESTAMP(0) NOT NULL,
+    `deletadoEm` TIMESTAMP(3) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

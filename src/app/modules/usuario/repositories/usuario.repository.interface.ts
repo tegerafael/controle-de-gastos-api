@@ -5,7 +5,7 @@ import { UsuarioResDto } from '../dtos/response/usuario-res.dto';
 export interface UsuarioRepositoryInterface {
   buscarTodos(): Promise<UsuarioResDto[]>;
 
-  buscarUm(id: string): Promise<UsuarioResDto>;
+  buscarPorId(id: string): Promise<UsuarioResDto>;
 
   criar(data: UsuarioReqDto): Promise<UsuarioResDto>;
 
@@ -13,5 +13,5 @@ export interface UsuarioRepositoryInterface {
 
   deletar(id: string): Promise<void>;
 
-  buscarPorEmail(email: string): Promise<boolean>;
+  buscarPorEmail(email: string): Promise<UsuarioResDto>;
 }

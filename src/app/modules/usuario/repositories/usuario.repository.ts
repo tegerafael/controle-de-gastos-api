@@ -13,7 +13,7 @@ export class UsuarioRepository implements UsuarioRepositoryInterface {
     return this.prismaService.usuario.findMany();
   }
 
-  public async buscarUm(id: string): Promise<UsuarioResDto> {
+  public async buscarPorId(id: string): Promise<UsuarioResDto> {
     return this.prismaService.usuario.findFirst({
       where: { id },
     });
@@ -38,11 +38,9 @@ export class UsuarioRepository implements UsuarioRepositoryInterface {
     });
   }
 
-  public async buscarPorEmail(email: string): Promise<boolean> {
-    const usuario = await this.prismaService.usuario.findFirst({
+  public async buscarPorEmail(email: string): Promise<UsuarioResDto> {
+    return this.prismaService.usuario.findFirst({
       where: { email },
     });
-
-    return !!usuario;
   }
 }

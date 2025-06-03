@@ -13,7 +13,7 @@ export class EmailEUnicoConstraint implements ValidatorConstraintInterface {
   constructor(private readonly usuarioService: UsuarioService) {}
 
   async validate(email: string): Promise<boolean> {
-    const usuario = this.usuarioService.buscarPorEmail(email);
+    const usuario = await this.usuarioService.buscarPorEmail(email);
     return !usuario;
   }
 

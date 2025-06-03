@@ -14,8 +14,8 @@ export class UsuarioService implements UsuarioServiceInterface {
     return this.usuarioRepository.buscarTodos();
   }
 
-  public async buscarUm(id: string): Promise<UsuarioResDto> {
-    return this.verificarUsuarioExistente(id);
+  public async buscarPorId(id: string): Promise<UsuarioResDto> {
+    return this.existe(id);
   }
 
   public async criar(usuario: UsuarioReqDto): Promise<UsuarioResDto> {
@@ -26,7 +26,7 @@ export class UsuarioService implements UsuarioServiceInterface {
   }
 
   public async atualizar(id: string, usuario: AtualizarUsuarioReqDto): Promise<UsuarioResDto> {
-    await this.verificarUsuarioExistente(id);
+    await this.existe(id);
 
     const saltRounds = 10;
     if (usuario.senha) {
@@ -37,18 +37,18 @@ export class UsuarioService implements UsuarioServiceInterface {
   }
 
   public async deletar(id: string): Promise<void> {
-    await this.verificarUsuarioExistente(id);
+    await this.existe(id);
 
     await this.usuarioRepository.deletar(id);
   }
 
-  public async buscarPorEmail(email: string): Promise<boolean> {
+  public async buscarPorEmail(email: string): Promise<UsuarioResDto> {
     return this.usuarioRepository.buscarPorEmail(email);
   }
 
-  private async verificarUsuarioExistente(id: string): Promise<UsuarioResDto> {
-    const usuario = await this.usuarioRepository.buscarUm(id);
-    
+  public async existe(id: string): Promise<UsuarioResDto> {
+    const usuario = await this.usuarioRepository.buscarPorId(id);
+
     if (!usuario) {
       throw new NotFoundException(`Usuário não encontrado`);
     }

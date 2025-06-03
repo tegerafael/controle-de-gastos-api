@@ -34,11 +34,16 @@ enum CategoriaGasto {
 model Gasto {
   id           String          @id @default(uuid()) @db.VarChar(36)
   descricao    String          @db.VarChar(255)
-  valor        Decimal         @db.Decimal(10, 2)
-  data         DateTime        @db.Timestamp(3)
+  valor        Float           @db.Float
+  data         DateTime        @db.Date
   categoria    CategoriaGasto
-
+  
   id_usu_fk    String          @db.VarChar(36)
+
+  criadoEm     DateTime  @default(now()) @db.Timestamp(0)
+  atualizadoEm DateTime  @updatedAt @db.Timestamp(0)
+  deletadoEm   DateTime? @db.Timestamp(3)
+
   usuario      Usuario         @relation(fields: [id_usu_fk], references: [id])
 
   @@map("gastos")

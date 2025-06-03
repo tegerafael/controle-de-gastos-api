@@ -5,7 +5,7 @@ import { UsuarioResDto } from '../dtos/response/usuario-res.dto';
 export interface UsuarioControllerInterface {
   buscarTodos(): Promise<UsuarioResDto[]>;
 
-  buscarUm(id: string): Promise<UsuarioResDto>;
+  buscarPorId(id: string): Promise<UsuarioResDto>;
 
   criar(usuario: UsuarioReqDto): Promise<UsuarioResDto>;
 

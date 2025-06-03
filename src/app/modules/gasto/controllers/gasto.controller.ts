@@ -1,34 +1,34 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UsuarioControllerInterface } from './usuario.controller.interface';
-import { UsuarioResDto } from '../dtos/response/usuario-res.dto';
+import { GastoControllerInterface } from './gasto.controller.interface';
+import { GastoResDto } from '../dtos/response/gasto-res.dto';
 import { ErrorHandlerFactory } from 'src/app/commons/errors/error-handler.factory';
-import { UsuarioService } from '../services/usuario.service';
-import { UsuarioReqDto } from '../dtos/request/usuario-req.dto';
-import { AtualizarUsuarioReqDto } from '../dtos/request/atualizar-usuario-req.dto';
+import { GastoService } from '../services/gasto.service';
+import { GastoReqDto } from '../dtos/request/gasto-req.dto';
+import { AtualizarGastoReqDto } from '../dtos/request/atualizar-gasto-req.dto';
 
-@ApiTags('Usuario')
-@Controller('usuarios')
-export class UsuarioController implements UsuarioControllerInterface {
-  constructor(private readonly usuarioService: UsuarioService) {}
+@ApiTags('Gasto')
+@Controller('gastos')
+export class GastoController implements GastoControllerInterface {
+  constructor(private readonly gastoService: GastoService) {}
 
   @Get('')
-  @ApiOperation({ summary: 'Buscar todos os usuários' })
+  @ApiOperation({ summary: 'Buscar todos os gastos' })
   @ApiResponse({
     status: 200,
-    description: 'Lista de usuários retornada com sucesso',
-    type: [UsuarioResDto],
+    description: 'Lista de gastos retornada com sucesso',
+    type: [GastoResDto],
   })
-  public async buscarTodos(): Promise<UsuarioResDto[]> {
+  public async buscarTodos(): Promise<GastoResDto[]> {
     try {
-      return this.usuarioService.buscarTodos();
+      return this.gastoService.buscarTodos();
     } catch (error) {
       ErrorHandlerFactory.throwError(error);
     }
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Buscar um usuário pelo ID' })
+  @ApiOperation({ summary: 'Buscar um gasto pelo ID' })
   @ApiParam({
     name: 'id',
     description: 'ID do usuário a ser buscado',
@@ -37,16 +37,16 @@ export class UsuarioController implements UsuarioControllerInterface {
   })
   @ApiResponse({
     status: 200,
-    description: 'Usuário encontrado com sucesso',
-    type: UsuarioResDto,
+    description: 'Gasto encontrado com sucesso',
+    type: GastoResDto,
   })
   @ApiResponse({
     status: 404,
-    description: 'Usuário não encontrado',
+    description: 'Gasto não encontrado',
   })
-  public async buscarPorId(@Param('id') id: string): Promise<UsuarioResDto> {
+  public async buscarPorId(@Param('id') id: string): Promise<GastoResDto> {
     try {
-      return this.usuarioService.buscarPorId(id);
+      return this.gastoService.buscarPorId(id);
     } catch (error) {
       ErrorHandlerFactory.throwError(error);
     }
@@ -56,12 +56,12 @@ export class UsuarioController implements UsuarioControllerInterface {
   @ApiOperation({ summary: 'Criar um novo usuário' })
   @ApiResponse({
     status: 201,
-    description: 'Usuário criado com sucesso',
-    type: UsuarioResDto,
+    description: 'Gasto criado com sucesso',
+    type: GastoReqDto,
   })
-  public async criar(@Body() usuario: UsuarioReqDto): Promise<UsuarioResDto> {
+  public async criar(@Body() gasto: GastoReqDto): Promise<GastoResDto> {
     try {
-      return this.usuarioService.criar(usuario);
+      return this.gastoService.criar(gasto);
     } catch (error) {
       ErrorHandlerFactory.throwError(error);
     }
@@ -77,20 +77,20 @@ export class UsuarioController implements UsuarioControllerInterface {
   })
   @ApiBody({
     description: 'Dados do usuário a serem atualizados',
-    type: UsuarioReqDto,
+    type: GastoReqDto,
   })
   @ApiResponse({
     status: 200,
     description: 'Usuário atualizado com sucesso',
-    type: UsuarioResDto,
+    type: GastoResDto,
   })
   @ApiResponse({
     status: 404,
     description: 'Usuário não encontrado',
   })
-  public async atualizar(@Param('id') id: string, @Body() usuario: AtualizarUsuarioReqDto): Promise<UsuarioResDto> {
+  public async atualizar(@Param('id') id: string, @Body() gasto: AtualizarGastoReqDto): Promise<GastoResDto> {
     try {
-      return this.usuarioService.atualizar(id, usuario);
+      return this.gastoService.atualizar(id, gasto);
     } catch (error) {
       ErrorHandlerFactory.throwError(error);
     }
@@ -115,7 +115,7 @@ export class UsuarioController implements UsuarioControllerInterface {
   @HttpCode(204)
   public async deletar(@Param('id') id: string): Promise<void> {
     try {
-      return this.usuarioService.deletar(id);
+      return this.gastoService.deletar(id);
     } catch (error) {
       ErrorHandlerFactory.throwError(error);
     }
