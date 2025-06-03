@@ -31,7 +31,7 @@ export class GastoController implements GastoControllerInterface {
   @ApiOperation({ summary: 'Buscar um gasto pelo ID' })
   @ApiParam({
     name: 'id',
-    description: 'ID do usuário a ser buscado',
+    description: 'ID do gasto a ser buscado',
     required: true,
     type: String,
   })
@@ -53,7 +53,7 @@ export class GastoController implements GastoControllerInterface {
   }
 
   @Post('')
-  @ApiOperation({ summary: 'Criar um novo usuário' })
+  @ApiOperation({ summary: 'Criar um novo gasto' })
   @ApiResponse({
     status: 201,
     description: 'Gasto criado com sucesso',
@@ -68,25 +68,25 @@ export class GastoController implements GastoControllerInterface {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Atualizar um usuário existente' })
+  @ApiOperation({ summary: 'Atualizar um gasto existente' })
   @ApiParam({
     name: 'id',
-    description: 'ID do usuário a ser atualizado',
+    description: 'ID do gasto a ser atualizado',
     required: true,
     type: String,
   })
   @ApiBody({
-    description: 'Dados do usuário a serem atualizados',
+    description: 'Dados do gasto a serem atualizados',
     type: GastoReqDto,
   })
   @ApiResponse({
     status: 200,
-    description: 'Usuário atualizado com sucesso',
+    description: 'Gasto atualizado com sucesso',
     type: GastoResDto,
   })
   @ApiResponse({
     status: 404,
-    description: 'Usuário não encontrado',
+    description: 'Gasto não encontrado',
   })
   public async atualizar(@Param('id') id: string, @Body() gasto: AtualizarGastoReqDto): Promise<GastoResDto> {
     try {
@@ -97,20 +97,20 @@ export class GastoController implements GastoControllerInterface {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Deletar um usuário pelo ID' })
+  @ApiOperation({ summary: 'Deletar um gasto pelo ID' })
   @ApiParam({
     name: 'id',
-    description: 'ID do usuário a ser deletado',
+    description: 'ID do gasto a ser deletado',
     required: true,
     type: String,
   })
   @ApiResponse({
     status: 204,
-    description: 'Usuário deletado com sucesso',
+    description: 'Gasto deletado com sucesso',
   })
   @ApiResponse({
     status: 404,
-    description: 'Usuário não encontrado',
+    description: 'Gasto não encontrado',
   })
   @HttpCode(204)
   public async deletar(@Param('id') id: string): Promise<void> {
