@@ -48,6 +48,8 @@ export class GastoRepository implements GastoRepositoryInterface {
             nome: true,
           },
         },
+        descricao: true,
+        categoria: true,
       },
       where: { id_usu_fk },
     });

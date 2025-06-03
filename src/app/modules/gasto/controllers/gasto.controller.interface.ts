@@ -14,5 +14,5 @@ export interface GastoControllerInterface {
 
   deletar(id: string): Promise<void>;
 
-  buscarInformacoesDetalhadas(id: string): Promise<InformacoesGastosResDto>;
+  buscarInformacoesDetalhadas(idw: string): Promise<InformacoesGastosResDto>;
 }

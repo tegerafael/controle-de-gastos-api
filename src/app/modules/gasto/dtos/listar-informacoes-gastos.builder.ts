@@ -8,6 +8,11 @@ export class ListarInformacoesGastosBuilder {
     return {
       nome: gastos[0].usuario.nome || '',
       total: gastos.reduce((soma, gasto) => soma + (gasto.valor || 0), 0),
+      gastos: gastos.map((gasto) => ({
+        descricao: gasto.descricao,
+        categoria: gasto.categoria,
+        total: gasto.valor || 0,
+      })),
     };
   }
 }
