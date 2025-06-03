@@ -6,7 +6,7 @@ import { GastosInformacoesDto } from './gastos-informacoes.dto';
 export class ListarInformacoesGastosBuilder {
   build(gastos: GastosInformacoesDto[]): InformacoesGastosResDto {
     return {
-      nome: gastos[0].usuario.nome || '',
+      usuario: gastos[0].usuario.nome || '',
       total: gastos.reduce((soma, gasto) => soma + (gasto.valor || 0), 0),
       gastos: gastos.map((gasto) => ({
         descricao: gasto.descricao,

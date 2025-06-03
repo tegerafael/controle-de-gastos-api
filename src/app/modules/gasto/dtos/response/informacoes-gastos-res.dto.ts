@@ -6,7 +6,7 @@ export class InformacoesGastosResDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  nome: string;
+  usuario: string;
 
   @ApiProperty()
   @IsNumber()

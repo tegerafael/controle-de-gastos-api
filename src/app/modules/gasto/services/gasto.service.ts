@@ -41,6 +41,10 @@ export class GastoService implements GastoServiceInterface {
   public async buscarInformacoesDetalhadas(id: string): Promise<InformacoesGastosResDto> {
     const gastos = await this.gastoRepository.buscarInformacoesDetalhadas(id);
 
+    if (!gastos || gastos.length === 0) {
+      throw new NotFoundException(`Gastos não encontrados para o usuário informado`);
+    }
+
     return this.listarInformacoesGastosBuilder.build(gastos);
   }
 
