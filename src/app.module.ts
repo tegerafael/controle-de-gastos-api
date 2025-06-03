@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { UsuarioModule } from './modules/usuario/usuario.module';
+import { UsuarioModule } from './app/modules/usuario/usuario.module';
+import { HealthcheckModule } from './infra/modules/database/prisma/healthcheck/healthcheck.module';
 
 @Module({
-  imports: [UsuarioModule],
+  imports: [HealthcheckModule, UsuarioModule],
 })
 export class AppModule {}

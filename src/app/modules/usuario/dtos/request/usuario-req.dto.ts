@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsOptional, IsString, IsStrongPassword } from 'class-validator';
-import { EmailEUnico } from 'src/commons/validators/email-e-unico.validator';
+import { EmailEUnico } from 'src/app/commons/validators/email-e-unico.validator';
 
 export class UsuarioReqDto {
   @ApiProperty()

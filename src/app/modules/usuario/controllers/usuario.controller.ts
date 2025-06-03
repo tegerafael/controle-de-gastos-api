@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@ne
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsuarioControllerInterface } from './usuario.controller.interface';
 import { UsuarioResDto } from '../dtos/response/usuario-res.dto';
-import { ErrorHandlerFactory } from 'src/commons/errors/error-handler.factory';
+import { ErrorHandlerFactory } from 'src/app/commons/errors/error-handler.factory';
 import { UsuarioService } from '../services/usuario.service';
 import { UsuarioReqDto } from '../dtos/request/usuario-req.dto';
 import { AtualizarUsuarioReqDto } from '../dtos/request/atualizar-usuario-req.dto';
