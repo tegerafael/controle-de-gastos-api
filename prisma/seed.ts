@@ -1,57 +1,41 @@
-// import { PrismaClient } from '@prisma/client';
-// import { addresses } from '../src/modules/address/data/addresses';
-// import * as fs from 'fs';
-// const prisma = new PrismaClient();
+import { PrismaClient } from '@prisma/client';
+import { gastos } from '../src/app/modules/gasto/data/gasto.seed';
+import { usuarios } from '../src/app/modules/usuario/data/usuario.seed';
+const prisma = new PrismaClient();
 
-// function readSQLFile(fileName: string): string {
-//   const filePath = `./${fileName}`;
-//   return fs.readFileSync(filePath, 'utf8');
-// }
+async function criarUsuarios() {
+  const usuariosExistentes = await prisma.usuario.findMany();
+  if (usuariosExistentes.length === 0) {
+    await prisma.usuario.createMany({
+      data: usuarios,
+    });
+    console.log('Usuários criados com sucesso');
+  } else {
+    console.log('Usuários já existem, pulando criação');
+  }
+}
 
-// async function seedStates() {
-//   const existingStates = await prisma.state.findMany();
-//   if (existingStates.length === 0) {
-//     const script = readSQLFile('insert_estados.sql');
-//     await prisma.$executeRawUnsafe(script as any);
-//     console.log('States seeded successfully');
-//   } else {
-//     console.log('States already exist, skipping seeding');
-//   }
-// }
+async function criarGastos() {
+  const gastosExistentes = await prisma.gasto.findMany();
+  if (gastosExistentes.length === 0) {
+    await prisma.gasto.createMany({
+      data: gastos,
+    });
+    console.log('Gastos criados com sucesso');
+  } else {
+    console.log('Gastos já existem, pulando criação');
+  }
+}
 
-// async function seedCities() {
-//   const existingCities = await prisma.city.findMany();
-//   if (existingCities.length === 0) {
-//     const script = readSQLFile('insert_cidades.sql');
-//     await prisma.$executeRawUnsafe(script as any);
-//     console.log('Cities seeded successfully');
-//   } else {
-//     console.log('Cities already exist, skipping seeding');
-//   }
-// }
+async function main() {
+  try {
+    await criarUsuarios();
+    await criarGastos();
+  } catch (error) {
+    console.error(error);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
 
-// async function seedAddresses() {
-//   const existingAddresses = await prisma.address.findMany();
-//   if (existingAddresses.length === 0) {
-//     await prisma.address.createMany({
-//       data: addresses,
-//     });
-//     console.log('Addresses seeded successfully');
-//   } else {
-//     console.log('Addresses already exist, skipping seeding');
-//   }
-// }
-
-// async function main() {
-//   try {
-//     await seedStates();
-//     await seedCities();
-//     await seedAddresses();
-//   } catch (error) {
-//     console.error(error);
-//   } finally {
-//     await prisma.$disconnect();
-//   }
-// }
-
-// main();
+main();

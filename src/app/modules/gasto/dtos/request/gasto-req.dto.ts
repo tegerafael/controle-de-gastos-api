@@ -1,10 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { CategoriaGasto } from '@prisma/client';
 import { Type } from 'class-transformer';
-import { IsDate, IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsDate, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { EUuidExiste } from 'src/app/commons/decorators/uuid-existe.decorator';
 
 export class GastoReqDto {
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  id?: string;
+
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
