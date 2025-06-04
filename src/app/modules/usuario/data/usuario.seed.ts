@@ -3,7 +3,7 @@ import { UsuarioReqDto } from '../dtos/request/usuario-req.dto';
 export const usuarios: UsuarioReqDto[] = [
   {
     id: '0450ad85-a676-4c89-902f-ea84103c3764',
-    nome: 'Tiago Rafael',
+    nome: 'Tiago Rafael Oliveira das Virgens',
     email: 'tiagorafael777@gmail.com',
     senha: '$2a$10$YCLQKi6yS6P8eOGJtd9LRugmWT6rAksaVHObp4oW/l1/j1zLitc7.',
   },
