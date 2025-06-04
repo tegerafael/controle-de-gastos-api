@@ -18,7 +18,7 @@ export class HealthcheckController implements HealthcheckControllerInterface {
     description: 'ok',
     type: StatusHealthcheckResDto,
   })
-  @ApiResponse({ status: 500, description: 'Internal server error' })
+  @ApiResponse({ status: 500, description: 'Erro interno do servidor' })
   async status() {
     return this.healthcheckService.status();
   }

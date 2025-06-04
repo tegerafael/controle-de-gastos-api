@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from 'src/app/modules/autenticacao/auth.service';
+import { AuthService } from 'src/app/modules/autenticacao/services/auth.service';
 import { UsuarioService } from 'src/app/modules/usuario/services/usuario.service';
 
 @Injectable()

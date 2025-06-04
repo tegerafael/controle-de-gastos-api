@@ -4,7 +4,7 @@ import { GastoController } from './controllers/gasto.controller';
 import { GastoService } from './services/gasto.service';
 import { GastoRepository } from './repositories/gasto.repository';
 import { ListarInformacoesGastosBuilder } from './dtos/listar-informacoes-gastos.builder';
-import { AuthService } from '../autenticacao/auth.service';
+import { AuthService } from '../autenticacao/services/auth.service';
 import { UsuarioService } from '../usuario/services/usuario.service';
 import { JwtService } from '@nestjs/jwt';
 import { UsuarioRepository } from '../usuario/repositories/usuario.repository';
