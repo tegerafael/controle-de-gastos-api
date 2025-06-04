@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GastoControllerInterface } from './gasto.controller.interface';
 import { GastoResDto } from '../dtos/response/gasto-res.dto';
@@ -7,9 +7,11 @@ import { GastoService } from '../services/gasto.service';
 import { GastoReqDto } from '../dtos/request/gasto-req.dto';
 import { AtualizarGastoReqDto } from '../dtos/request/atualizar-gasto-req.dto';
 import { InformacoesGastosResDto } from '../dtos/response/informacoes-gastos-res.dto';
+import { AuthGuard } from 'src/app/commons/guards/auth.guard';
 
 @ApiTags('Gasto')
 @Controller('gastos')
+@UseGuards(AuthGuard)
 export class GastoController implements GastoControllerInterface {
   constructor(private readonly gastoService: GastoService) {}
 

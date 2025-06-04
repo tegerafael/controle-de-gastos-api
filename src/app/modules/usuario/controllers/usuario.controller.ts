@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsuarioControllerInterface } from './usuario.controller.interface';
 import { UsuarioResDto } from '../dtos/response/usuario-res.dto';
@@ -6,9 +6,11 @@ import { ErrorHandlerFactory } from 'src/app/commons/errors/error-handler.factor
 import { UsuarioService } from '../services/usuario.service';
 import { UsuarioReqDto } from '../dtos/request/usuario-req.dto';
 import { AtualizarUsuarioReqDto } from '../dtos/request/atualizar-usuario-req.dto';
+import { AuthGuard } from 'src/app/commons/guards/auth.guard';
 
 @ApiTags('Usuario')
 @Controller('usuarios')
+@UseGuards(AuthGuard)
 export class UsuarioController implements UsuarioControllerInterface {
   constructor(private readonly usuarioService: UsuarioService) {}
 
